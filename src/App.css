@@ -26,6 +26,10 @@
   width: auto;
 }
 
+.container .card {
+  width: 14rem;
+}
+
 .App-title {
   font-size: 1.5em;
 }

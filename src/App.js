@@ -1,5 +1,5 @@
 import React from "react";
-
+import TouristInfoCards from "./components/TouristInfoCards";
 import Bookings from "./components/Bookings";
 import Heading from "./components/Heading";
 import "./App.css";
@@ -8,6 +8,7 @@ const App = () => {
   return (
     <div className="App">
       <Heading />
+      <TouristInfoCards />
       <Bookings />
     </div>
   );
