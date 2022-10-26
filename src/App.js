@@ -3,6 +3,7 @@ import TouristInfoCards from "./components/TouristInfoCards";
 import Bookings from "./components/Bookings";
 import Footer from "./components/Footer";
 import Heading from "./components/Heading";
+import SearchResults from "./components/SearchResults";
 import "./App.css";
 
 const hotelInfo = [
