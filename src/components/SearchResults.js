@@ -1,10 +1,10 @@
 import React from "react";
 
-const SearchResults = () => {
+const SearchResults = props => {
   return (
     <table className="table">
       <TableHeader />
-      <TableBody />
+      <TableBody results={props.results} />
     </table>
   );
 };
@@ -26,49 +26,21 @@ const TableHeader = () => {
   );
 };
 
-const TableBody = () => {
+const TableBody = props => {
   return (
     <tbody>
-      <tr>
-        <th>1</th>
-        <td>Ms</td>
-        <td>Yun</td>
-        <td>Ji</td>
-        <td>this.jiyun@gmail.com</td>
-        <td>65</td>
-        <td>2022-01-01</td>
-        <td>2022-01-01</td>
-      </tr>
-      <tr>
-        <th>1</th>
-        <td>Ms</td>
-        <td>Yun</td>
-        <td>Ji</td>
-        <td>this.jiyun@gmail.com</td>
-        <td>65</td>
-        <td>2022-01-01</td>
-        <td>2022-01-01</td>
-      </tr>
-      <tr>
-        <th>1</th>
-        <td>Ms</td>
-        <td>Yun</td>
-        <td>Ji</td>
-        <td>this.jiyun@gmail.com</td>
-        <td>65</td>
-        <td>2022-01-01</td>
-        <td>2022-01-01</td>
-      </tr>
-      <tr>
-        <th>1</th>
-        <td>Ms</td>
-        <td>Yun</td>
-        <td>Ji</td>
-        <td>this.jiyun@gmail.com</td>
-        <td>65</td>
-        <td>2022-01-01</td>
-        <td>2022-01-01</td>
-      </tr>
+      {props.results.map(booking => (
+        <tr>
+          <th>{booking.id}</th>
+          <td>{booking.title}</td>
+          <td>{booking.firstName}</td>
+          <td>{booking.surname}</td>
+          <td>{booking.email}</td>
+          <td>{booking.roomId}</td>
+          <td>{booking.checkInDate}</td>
+          <td>{booking.checkOutDate}</td>
+        </tr>
+      ))}
     </tbody>
   );
 };
