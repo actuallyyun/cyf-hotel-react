@@ -1,4 +1,5 @@
 import React from "react";
+import { DateTime } from "luxon";
 
 const SearchResults = props => {
   return (
@@ -21,6 +22,7 @@ const TableHeader = () => {
         <th>Room id</th>
         <th>Check-in Date</th>
         <th>Check-out Date</th>
+        <th>Nights</th>
       </tr>
     </thead>
   );
@@ -39,10 +41,23 @@ const TableBody = props => {
           <td>{booking.roomId}</td>
           <td>{booking.checkInDate}</td>
           <td>{booking.checkOutDate}</td>
+          <td>
+            <CalculateNights
+              checkInDate={booking.checkInDate}
+              checkOutDate={booking.checkOutDate}
+            />
+          </td>
         </tr>
       ))}
     </tbody>
   );
+};
+
+const CalculateNights = props => {
+  const checkInDate = DateTime.fromISO(props.checkInDate);
+  const checkOutDate = DateTime.fromISO(props.checkOutDate);
+  const nights = checkOutDate.diff(checkInDate, "days").toObject();
+  return nights.days;
 };
 
 export default SearchResults;
