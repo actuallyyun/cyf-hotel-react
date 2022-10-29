@@ -31,8 +31,8 @@ const TableHeader = () => {
 const TableBody = props => {
   return (
     <tbody>
-      {props.results.map(booking => (
-        <tr>
+      {props.results.map((booking, index) => (
+        <tr key={index}>
           <th>{booking.id}</th>
           <td>{booking.title}</td>
           <td>{booking.firstName}</td>
