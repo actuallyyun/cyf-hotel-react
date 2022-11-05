@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { DateTime } from "luxon";
 
 const SearchResults = props => {
@@ -29,10 +29,21 @@ const TableHeader = () => {
 };
 
 const TableBody = props => {
+  const [clickedRow, setClickedRow] = useState();
+
+  const handleClick = index => {
+    console.log(index);
+    setClickedRow(index);
+  };
+
   return (
     <tbody>
       {props.results.map((booking, index) => (
-        <tr key={index}>
+        <tr
+          key={index}
+          onClick={() => handleClick(index)}
+          className={clickedRow == index ? "highlight" : null}
+        >
           <th>{booking.id}</th>
           <td>{booking.title}</td>
           <td>{booking.firstName}</td>
