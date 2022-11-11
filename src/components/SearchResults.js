@@ -5,7 +5,10 @@ const SearchResults = props => {
   return (
     <table className="table">
       <TableHeader />
-      <TableBody results={props.results} />
+      <TableBody
+        results={props.results}
+        setShowProfileId={props.setShowProfileId}
+      />
     </table>
   );
 };
@@ -32,8 +35,12 @@ const TableBody = props => {
   const [clickedRow, setClickedRow] = useState();
 
   const handleClick = index => {
-    console.log(index);
     setClickedRow(index);
+  };
+
+  const handleShowProfile = event => {
+    const id = event.target.value;
+    props.setShowProfileId(id);
   };
 
   return (
@@ -57,6 +64,12 @@ const TableBody = props => {
               checkInDate={booking.checkInDate}
               checkOutDate={booking.checkOutDate}
             />
+          </td>
+
+          <td>
+            <button value={booking.id} onClick={handleShowProfile}>
+              Show Profile
+            </button>
           </td>
         </tr>
       ))}

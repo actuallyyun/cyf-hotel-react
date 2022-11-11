@@ -6,7 +6,6 @@ const Search = props => {
 
   const handleSearchInput = event => {
     setSearchInput(event.target.value);
-    console.log(searchInput);
   };
 
   const handleSubmit = event => {

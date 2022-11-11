@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Search from "./Search.js";
 import SearchResults from "./SearchResults.js";
 import FakeBookings from "../data/fakeBookings.json";
+import CustomerProfile from "./CustomerProfile.js";
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -18,14 +19,16 @@ const Bookings = () => {
         booking.firstName === searchVal || booking.surname === searchVal
     );
     setBookings(filteredBookings);
-    console.log(bookings);
   };
+
+  const [showProfileId, setShowProfileId] = useState();
 
   return (
     <div className="App-content">
       <div className="container">
         <Search search={search} />
-        <SearchResults results={bookings} />
+        <SearchResults results={bookings} setShowProfileId={setShowProfileId} />
+        <CustomerProfile id={showProfileId} />
       </div>
     </div>
   );
