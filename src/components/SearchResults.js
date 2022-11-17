@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { DateTime } from "luxon";
+import CustomerProfile from "./CustomerProfile";
 
 const SearchResults = props => {
   return (
