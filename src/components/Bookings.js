@@ -4,16 +4,25 @@ import SearchResults from "./SearchResults.js";
 import FakeBookings from "../data/fakeBookings.json";
 import CustomerProfile from "./CustomerProfile.js";
 import Spinner from "react-bootstrap/Spinner";
+import Alert from "react-bootstrap/Alert";
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(null);
+  const [hasError, setHasError] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const fetchBookings = async () => {
     try {
-      const response = await fetch("https://cyf-react.glitch.me/delayed");
-      const data = await response.json();
-      setBookings(data);
+      const response = await fetch("https://cyf-react.glitch.me/error");
+      if (response.ok) {
+        const data = await response.json();
+        setBookings(data);
+      } else {
+        console.log(response);
+        setHasError(true);
+        setErrorMessage(response.status);
+      }
       setLoading(true);
     } catch (e) {
       console.log(e);
@@ -45,6 +54,17 @@ const Bookings = () => {
           />
         ) : (
           <Spinner animation="border" />
+        )}
+        {hasError ? (
+          <Alert variant="danger">
+            <Alert.Heading>Something is wrong...</Alert.Heading>
+            <p>Error Code: {errorMessage}</p>
+          </Alert>
+        ) : (
+          <SearchResults
+            results={bookings}
+            setShowProfileId={setShowProfileId}
+          />
         )}
         <CustomerProfile id={showProfileId} />
       </div>
