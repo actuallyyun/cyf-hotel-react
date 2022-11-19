@@ -3,14 +3,25 @@ import Search from "./Search.js";
 import SearchResults from "./SearchResults.js";
 import FakeBookings from "../data/fakeBookings.json";
 import CustomerProfile from "./CustomerProfile.js";
+import Spinner from "react-bootstrap/Spinner";
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(null);
+
+  const fetchBookings = async () => {
+    try {
+      const response = await fetch("https://cyf-react.glitch.me/delayed");
+      const data = await response.json();
+      setBookings(data);
+      setLoading(true);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   useEffect(() => {
-    fetch("https://cyf-react.glitch.me")
-      .then(res => res.json())
-      .then(data => setBookings(data));
+    fetchBookings();
   }, []);
 
   const search = searchVal => {
@@ -27,7 +38,14 @@ const Bookings = () => {
     <div className="App-content">
       <div className="container">
         <Search search={search} />
-        <SearchResults results={bookings} setShowProfileId={setShowProfileId} />
+        {loading ? (
+          <SearchResults
+            results={bookings}
+            setShowProfileId={setShowProfileId}
+          />
+        ) : (
+          <Spinner animation="border" />
+        )}
         <CustomerProfile id={showProfileId} />
       </div>
     </div>
