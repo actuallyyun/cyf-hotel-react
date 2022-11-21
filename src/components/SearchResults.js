@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { DateTime } from "luxon";
-import CustomerProfile from "./CustomerProfile";
+import TableHeader from "./TableHeader";
 
 const SearchResults = props => {
   return (
@@ -11,24 +11,6 @@ const SearchResults = props => {
         setShowProfileId={props.setShowProfileId}
       />
     </table>
-  );
-};
-
-const TableHeader = () => {
-  return (
-    <thead>
-      <tr>
-        <th>id</th>
-        <th>Title</th>
-        <th>First Name</th>
-        <th>Surname</th>
-        <th>Email</th>
-        <th>Room id</th>
-        <th>Check-in Date</th>
-        <th>Check-out Date</th>
-        <th>Nights</th>
-      </tr>
-    </thead>
   );
 };
 

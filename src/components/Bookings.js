@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Search from "./Search.js";
 import SearchResults from "./SearchResults.js";
-import FakeBookings from "../data/fakeBookings.json";
 import CustomerProfile from "./CustomerProfile.js";
 import Spinner from "react-bootstrap/Spinner";
 import Alert from "react-bootstrap/Alert";
+import BookingForm from "./BookingForm.js";
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -14,12 +14,11 @@ const Bookings = () => {
 
   const fetchBookings = async () => {
     try {
-      const response = await fetch("https://cyf-react.glitch.me/error");
+      const response = await fetch("https://cyf-react.glitch.me");
       if (response.ok) {
         const data = await response.json();
         setBookings(data);
       } else {
-        console.log(response);
         setHasError(true);
         setErrorMessage(response.status);
       }
@@ -60,13 +59,9 @@ const Bookings = () => {
             <Alert.Heading>Something is wrong...</Alert.Heading>
             <p>Error Code: {errorMessage}</p>
           </Alert>
-        ) : (
-          <SearchResults
-            results={bookings}
-            setShowProfileId={setShowProfileId}
-          />
-        )}
+        ) : null}
         <CustomerProfile id={showProfileId} />
+        <BookingForm bookings={bookings} setBookings={setBookings} />
       </div>
     </div>
   );
